@@ -15,13 +15,13 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   Widget build(BuildContext context) {
     print("widget build");
     return Scaffold(
-        appBar: AppBar(title: Text("Favorite Items"), actions: [
+        appBar: AppBar(title: const Text("Favorite Items"), actions: [
           IconButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => FavItems())));
+                    MaterialPageRoute(builder: ((context) => const FavItems())));
               },
-              icon: Icon(Icons.favorite)),
+              icon: const Icon(Icons.favorite)),
         ]),
         body: ListView.builder(
             itemCount: 100,
@@ -38,8 +38,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   },
                   title: Text("intem index $index"),
                   trailing: value.selectedItem.contains(index)
-                      ? Icon(Icons.favorite,color: Colors.red,)
-                      : Icon(Icons.favorite_border_outlined),
+                      ? const Icon(Icons.favorite,color: Colors.red,)
+                      : const Icon(Icons.favorite_border_outlined),
                 );
               });
             })));

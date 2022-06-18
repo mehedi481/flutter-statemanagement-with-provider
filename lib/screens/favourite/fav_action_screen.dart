@@ -12,12 +12,11 @@ class FavItems extends StatefulWidget {
 class _FavItemsState extends State<FavItems> {
   @override
   Widget build(BuildContext context) {
-    final _favItemProvider =
-        // Provider.of<FavouriteItemProvider>(context, listen: true);
+    // final _favItemProvider = Provider.of<FavouriteItemProvider>(context, listen: true);
         print("widget build");
     return Scaffold(
         appBar: AppBar(
-          title: Text("Favorite Items"),
+          title: const Text("Favorite Items"),
         ),
         body: Consumer<FavouriteItemProvider>(builder: (context, value, child) {
           return ListView.builder(
@@ -35,8 +34,8 @@ class _FavItemsState extends State<FavItems> {
                   },
                   title: Text("intem index $index"),
                   trailing: value.selectedItem.contains(index)
-                      ? Icon(Icons.favorite,color: Colors.red,)
-                      : Icon(Icons.favorite_border_outlined),
+                      ? const Icon(Icons.favorite,color: Colors.red,)
+                      : const Icon(Icons.favorite_border_outlined),
                 );
               }));
         }));
