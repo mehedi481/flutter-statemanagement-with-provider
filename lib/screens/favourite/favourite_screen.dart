@@ -38,7 +38,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   },
                   title: Text("intem index $index"),
                   trailing: value.selectedItem.contains(index)
-                      ? Icon(Icons.favorite)
+                      ? Icon(Icons.favorite,color: Colors.red,)
                       : Icon(Icons.favorite_border_outlined),
                 );
               });
