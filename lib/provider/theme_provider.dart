@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
-class ThemeProvider with ChangeNotifier{
+import 'package:shared_preferences/shared_preferences.dart';
+
+class ThemeProvider with ChangeNotifier {
   String currentTheme = "system";
 
-  ThemeMode get themeMode{
-    if(currentTheme == 'light'){
+  ThemeMode get themeMode {
+    if (currentTheme == 'light') {
       return ThemeMode.light;
-    }else if(currentTheme == 'dark'){
+    } else if (currentTheme == 'dark') {
       return ThemeMode.dark;
-    }else{
+    } else {
       return ThemeMode.system;
     }
   }
 
-  void changeTheme(String theme){
+  void changeTheme(String theme) async {
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    await _prefs.setString("theme", theme);
     currentTheme = theme;
+    notifyListeners();
+  }
+
+  void initialize() async {
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    currentTheme = _prefs.getString("theme") ?? 'system';
     notifyListeners();
   }
 }

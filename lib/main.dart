@@ -28,22 +28,20 @@ class MyApp extends StatelessWidget {
           create: (_) => FavouriteItemProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
+          create: (_) => ThemeProvider()..initialize(),
         ),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context,value,_) {
-          return MaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData.light(),
-            darkTheme: ThemeData.dark().copyWith(
-              appBarTheme: const AppBarTheme(color: Colors.red),
-            ),
-            themeMode: value.themeMode,
-            home: const ThemeScreen(),
-          );
-        }
-      ),
+      child: Consumer<ThemeProvider>(builder: (context, value, _) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark().copyWith(
+            appBarTheme: const AppBarTheme(color: Colors.red),
+          ),
+          themeMode: value.themeMode,
+          home: const ThemeScreen(),
+        );
+      }),
     );
   }
 }
