@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_statemanagement_provider/provider/count_provider.dart';
 import 'package:flutter_statemanagement_provider/provider/example_one_provider.dart';
 import 'package:flutter_statemanagement_provider/provider/favourite_item_provider.dart';
+import 'package:flutter_statemanagement_provider/provider/search_or_filter_provider.dart';
 import 'package:flutter_statemanagement_provider/provider/theme_provider.dart';
 import 'package:flutter_statemanagement_provider/screens/favourite/favourite_screen.dart';
 import 'package:flutter_statemanagement_provider/screens/search/search_screen.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => FavouriteItemProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SearchProvider()..init(),
         ),
         ChangeNotifierProvider(
           create: (_) => ThemeProvider()..initialize(),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_statemanagement_provider/provider/search_or_filter_provider.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -9,47 +11,33 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  late List<Map<String, dynamic>> list;
-
-  final List<Map<String, dynamic>> itemList = [
-    {"name": "Mehedi Hasan", "country": "Bangladesh"},
-    {"name": "Hasan", "country": "India"},
-    {"name": "MH", "country": "US"},
-    {"name": "Mehedi H", "country": "UK"},
-    {"name": "Minhaz", "country": "Bangladesh"},
-    {"name": "Mehedi Hasan", "country": "Bangladesh"},
-    {"name": "Hasan", "country": "India"},
-    {"name": "MH", "country": "US"},
-    {"name": "Mehedi H", "country": "UK"},
-    {"name": "Minhaz", "country": "Bangladesh"},
-  ];
 
   @override
   void initState() {
     super.initState();
-    list = itemList;
   }
 
-  _searchFilter(String value) {
-    List<Map<String, dynamic>> results = [];
-    if (value.isEmpty || value == "" ) {
-      results = itemList;
-      print("value");
-    } else {
-      results = itemList
-          .where((data) =>
-              data["name"].toLowerCase().contains(value.toLowerCase()) ||
-              data["country"].toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    }
-    setState(() {
-      list = results;
-    });
-  }
+  // _searchFilter(String value) {
+  //   List<Map<String, dynamic>> results = [];
+  //   if (value.isEmpty || value == "") {
+  //     results = itemList;
+  //     print("value");
+  //   } else {
+  //     results = itemList
+  //         .where((data) =>
+  //             data["name"].toLowerCase().contains(value.toLowerCase()) ||
+  //             data["country"].toLowerCase().contains(value.toLowerCase()))
+  //         .toList();
+  //   }
+  //   setState(() {
+  //     list = results;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var _list = context.watch<SearchProvider>().list;
     return Scaffold(
       // backgroundColor: Colors.white,
       body: SafeArea(
@@ -58,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
             child: TextField(
               controller: _searchController,
-              onChanged: _searchFilter,
+              onChanged: context.watch<SearchProvider>().filterSearch,
               decoration: InputDecoration(
                 hintText: "Search what ever you want",
                 border: OutlineInputBorder(
@@ -76,13 +64,13 @@ class _SearchScreenState extends State<SearchScreen> {
               height: 250,
               color: Colors.orange,
               child: ListView.builder(
-                itemCount: list.length,
+                itemCount: _list.length,
                 itemBuilder: (context, index) => ListTile(
                   title: Text(
-                    '${index + 1} ${list[index]['name']}',
+                    '${index + 1} ${_list[index]['name']}',
                   ),
                   subtitle: Text(
-                    itemList[index]['country'],
+                    _list[index]['country'],
                   ),
                 ),
               ),
