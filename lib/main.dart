@@ -4,6 +4,7 @@ import 'package:flutter_statemanagement_provider/provider/example_one_provider.d
 import 'package:flutter_statemanagement_provider/provider/favourite_item_provider.dart';
 import 'package:flutter_statemanagement_provider/provider/theme_provider.dart';
 import 'package:flutter_statemanagement_provider/screens/favourite/favourite_screen.dart';
+import 'package:flutter_statemanagement_provider/screens/search/search_screen.dart';
 import 'package:flutter_statemanagement_provider/screens/theme_screen.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(color: Colors.red),
           ),
           themeMode: value.themeMode,
-          home: const ThemeScreen(),
+          home: const SearchScreen(),
         );
       }),
     );
